@@ -2,9 +2,13 @@ let pantalla = document.querySelector(".texto1");
 let botonB = document.querySelector(".borrar")
 botonB.addEventListener("click", function(){
 pantalla.textContent=pantalla.textContent.slice(0, pantalla.textContent.length - 1)
-if(pantalla.textContent.length <= 10){
-    pantalla.style.fontSize = "28px"
-}
+/*if(pantalla.textContent.length <= 10){
+    pantalla.style.fontSize = "25px"
+}*/
+losnumeros = puntosnumericos();
+losnumeros = quitapuntosnumericos(losnumeros);
+pantalla.textContent = losnumeros;
+fuentes()
 });
 let numero1;
 let numero2;
@@ -22,7 +26,7 @@ function dividir(a, b){
     return a / b
 };
 function calcular(){
-    numero2 = Number(pantalla.textContent)
+    numero2 = puntosnumericos();
 
     switch (operacion){
     case "+":{
@@ -44,13 +48,32 @@ function calcular(){
 }
 
 }
+function fuentes (){
+    let fuentes1 = pantalla.textContent.length
+    let fuentes2 = 24 - (fuentes1 - 10)
+    if(fuentes2 < 10){
+        fuentes2 = 10;
+    }
+    pantalla.style.fontSize = fuentes2 + "px";
+}
+function puntosnumericos (){
+    if(pantalla.textContent === ""){
+        return "";
+    }
+    return Number(
+        pantalla.textContent.replaceAll(".","")
+    );
+}
+function quitapuntosnumericos (losnumeros){
+        return losnumeros.toLocaleString("es-CO");
+}
 let botonsuma = document.querySelector(".suma")
 botonsuma.addEventListener("click", function(){
     if(operacion){
         calcular()
     }
     else{
-        numero1 = Number(pantalla.textContent)
+        numero1 = puntosnumericos();
     }
     operacion = "+"
     pantalla.textContent=""
@@ -61,7 +84,7 @@ botonresta.addEventListener("click", function(){
         calcular()
     }
     else{
-        numero1 = Number(pantalla.textContent)
+        numero1 = puntosnumericos();
     }
     operacion = "-"
     pantalla.textContent=""
@@ -72,7 +95,7 @@ botonmultiplicar.addEventListener("click", function(){
         calcular()
     }
     else{
-        numero1 = Number(pantalla.textContent)
+        numero1 = puntosnumericos();
     }
     operacion = "*"
     pantalla.textContent=""
@@ -83,14 +106,14 @@ botondividir.addEventListener("click", function(){
         calcular()
     }
     else{
-        numero1 = Number(pantalla.textContent)
+        numero1 = puntosnumericos();
     }
     operacion = "/"
     pantalla.textContent=""
 });
 let botonigual = document.querySelector(".igual")
 botonigual.addEventListener("click", function(){
-                numero2 = Number(pantalla.textContent)
+                numero2 = puntosnumericos();
                 
 let numero3;
 
@@ -121,13 +144,13 @@ switch (operacion){
     }
     break
 }
-pantalla.textContent = numero3;
+pantalla.textContent = numero3.toLocaleString("es-CO");
 
 numero1 = numero3;
 operacion = false;
 
 if(numero3.toString().length >= 10){
-    pantalla.style.fontSize = "14px"
+    pantalla.style.fontSize = "13px"
 }
 });
 
@@ -135,8 +158,10 @@ let botones = document.querySelectorAll("button")
 for(let inicio = 0; inicio < botones.length; inicio++){
     botones[inicio].addEventListener("click", function(){
         if(!isNaN(botones[inicio].textContent)){
-        if(pantalla.textContent.length < 11){
-            pantalla.textContent += botones[inicio].textContent
+        if(pantalla.textContent.length < 20){
+            pantalla.textContent += botones[inicio].textContent;
+            pantalla.textContent = quitapuntosnumericos(puntosnumericos());
+            fuentes()
         }}
     })
 };
@@ -162,5 +187,5 @@ let botonc = document.querySelector(".borrartodo")
 botonc.addEventListener("click", function(){
     operacion=false
     pantalla.textContent=""
-    pantalla.style.fontSize="28px"
+    pantalla.style.fontSize="24px"
 });
