@@ -2,11 +2,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("imagenes/fondo.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
  #margen{
   margin: 5px;
   border:solid black;
   padding:10px;
+  background-color: rgb(74, 72, 72);
+  border-radius: 15px;
 }
 .marco{
   display:grid;
@@ -16,6 +22,14 @@ body {
 .marco button{
   font-size:25px;
   padding:4px 10px;
+  color: black;
+  border: solid 2px gray;
+  background-color: rgb(69, 60, 60);
+  border-radius: 8px;
+}
+.marco button:hover{
+  transform: scale(0.9);
+  transition: 0.5s;
 }
 .pantalla{
   margin-bottom: 15px;
@@ -24,10 +38,14 @@ body {
   max-inline-size: 100%;
   padding:10px;
   overflow: hidden;
+  border-radius: 7px;
+  background-color: rgb(10, 105, 10);
 }
 
 .texto1{
   margin: 0;
-  font-size:28px;
+  font-size: 24px;
   text-align: right;
+  color: rgb(165, 165, 140);
+  font-family: Arial, sans-serif;
 }
